@@ -17,8 +17,8 @@ class ResourcePathError(StyledstrError):
 
 class PresetFileError(StyledstrError):
     def __init__(self, preset: str) -> None:
-        super().__init__(f'Preset file {preset}.yaml is not found in the '
-                         'resource path.')
+        super().__init__('Cannot found any valid preset file in the resource '
+                         f'path with preset {preset}.')
 
 
 class TokenError(StyledstrError):
