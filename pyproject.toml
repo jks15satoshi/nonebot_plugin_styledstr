@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-styledstr"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Styled String Managing Plugin for Nonebot 2"
 authors = ["Satoshi Jek <jks15satoshi@gmail.com>"]
 license = "MIT"
