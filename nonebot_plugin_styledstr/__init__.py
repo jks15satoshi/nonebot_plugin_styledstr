@@ -1,6 +1,4 @@
-"""
-风格化字符串管理
-"""
+"""风格化字符串管理"""
 import nonebot
 from nonebot import export
 
