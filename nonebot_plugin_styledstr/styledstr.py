@@ -1,6 +1,4 @@
-"""
-风格化字符串解析器
-"""
+"""风格化字符串解析器"""
 import json
 import re
 from functools import reduce
@@ -45,8 +43,7 @@ class Styledstr(object):
 
         try:
             strings = self.__load_preset(preset)
-            result = reduce(lambda key, val: key[val], token.split('.'),
-                            strings)
+            result = self.__token_parse(token, strings)
         except (exception.PresetFileError, exception.ResourcePathError,
                 exception.TokenError) as err:
             err.log()
@@ -118,3 +115,26 @@ class Styledstr(object):
                 split_str[i] = placeholders.get(item[1:-1].lower())
 
         return ''.join(split_str)
+
+    @staticmethod
+    def __token_parse(token: str, preset_contents: dict[str, Any]) -> str:
+        """
+        解析字符串标签。
+
+        参数：
+        - `token: str`：字符串标签。
+        - `preset_contents: dict[str, Any]`：风格预设内容。
+
+        异常：
+        - `exception.TokenError`：字符串标签不存在于风格预设内容中。
+
+        返回：
+        - `str`：标签所指示的字符串内容。
+        """
+        try:
+            result = reduce(lambda key, val: key[val], token.split('.'),
+                            preset_contents)
+        except KeyError:
+            raise exception.TokenError(token)
+        else:
+            return result
