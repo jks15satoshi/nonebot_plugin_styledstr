@@ -3,6 +3,7 @@
 Nonebot 2 风格化字符串管理插件。
 
 [![time tracker](https://wakatime.com/badge/github/jks15satoshi/nonebot_plugin_styledstr.svg)](https://wakatime.com/badge/github/jks15satoshi/nonebot_plugin_styledstr)
+![PyPI](https://img.shields.io/pypi/v/nonebot-plugin-styledstr)
 
 > 由于本人 Python 水平低下，因此源码可能会令人不适，烦请谅解。
 
