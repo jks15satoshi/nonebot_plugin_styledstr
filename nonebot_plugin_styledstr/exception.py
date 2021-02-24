@@ -17,7 +17,7 @@ class ResourcePathError(StyledstrError):
 
 class PresetFileError(StyledstrError):
     def __init__(self, /, preset='', *, message='') -> None:
-        super().__init__('Cannot found any valid preset file in the resource '
+        super().__init__('Cannot find any valid preset file in the resource '
                          f'path with preset {preset}.'
                          if not message else message)
 
