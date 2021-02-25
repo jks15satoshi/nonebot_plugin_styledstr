@@ -23,7 +23,9 @@ def init(config: Union[nb_conf.Config, dict[str, Any]]) -> Parser:
     返回：
     - `styledstr.Styledstr`：解析器对象。
     """
-    if type(config) is dict:
-        return Parser(**config)
+    if isinstance(config, dict):
+        parser = Parser(**config)
     else:
-        return Parser(**config.dict())
+        parser = Parser(**config.dict())
+
+    return parser

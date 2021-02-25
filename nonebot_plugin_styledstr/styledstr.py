@@ -83,7 +83,7 @@ class Parser(object):
 
         is_relative_path = re.search(valid_format, str(preset))
 
-        if type(preset) is str and not is_relative_path:
+        if isinstance(preset, str) and not is_relative_path:
             if not (path := self.__res_path):
                 raise exception.ResourcePathError()
 
@@ -98,7 +98,7 @@ class Parser(object):
             preset_file = files[0]
         else:
             preset_file = (self.__res_path / preset
-                           if is_relative_path and type(preset) is str
+                           if is_relative_path and isinstance(preset, str)
                            else preset)
 
             if not preset_file.exists():
@@ -175,7 +175,7 @@ class Parser(object):
         except (KeyError, TypeError):
             raise exception.TokenError(token)
         else:
-            if type(result) is not str:
+            if not isinstance(result, str):
                 message = f'The value of the token "{token}" is not a string.'
                 raise exception.TokenError(message=message)
             return result
