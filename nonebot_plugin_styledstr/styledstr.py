@@ -175,7 +175,7 @@ class Parser(object):
         except (KeyError, TypeError):
             raise exception.TokenError(token)
         else:
-            if type(result) is dict:
+            if type(result) is not str:
                 message = f'The value of the token "{token}" is not a string.'
                 raise exception.TokenError(message=message)
             return result
