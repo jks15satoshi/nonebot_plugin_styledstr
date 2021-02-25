@@ -6,6 +6,7 @@ Nonebot 2 风格化字符串管理插件。
 ![PyPI](https://img.shields.io/pypi/v/nonebot-plugin-styledstr)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/nonebot-plugin-styledstr)
 [![CodeFactor](https://www.codefactor.io/repository/github/jks15satoshi/nonebot_plugin_styledstr/badge)](https://www.codefactor.io/repository/github/jks15satoshi/nonebot_plugin_styledstr)
+[![codecov](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr/branch/main/graph/badge.svg?token=8M2AHA8J3M)](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr)
 ![GitHub](https://img.shields.io/github/license/jks15satoshi/nonebot_plugin_styledstr)
 
 > 由于本人 Python 水平低下，因此源码可能会令人不适，烦请谅解。
