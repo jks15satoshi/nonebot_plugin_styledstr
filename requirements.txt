@@ -12,7 +12,7 @@ loguru == 0.5.3
 # nonebot_plugin_styledstr/tests/conftest.py: 7,11
 # nonebot_plugin_styledstr/tests/test_import_export.py: 85,103,121,122
 # nonebot_plugin_styledstr/tests/test_load_preset.py: 31
-nonebot == 1.8.2
+nonebot == 2.0.0-alpha.10
 
 # nonebot_plugin_styledstr/nonebot_plugin_styledstr/config.py: 4
 pydantic == 1.7.3
