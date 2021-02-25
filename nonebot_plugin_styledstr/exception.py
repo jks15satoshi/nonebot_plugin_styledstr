@@ -23,5 +23,7 @@ class PresetFileError(StyledstrError):
 
 
 class TokenError(StyledstrError):
-    def __init__(self, token: str) -> None:
-        super().__init__(f'Token "{token}" is not found so cannot be parsed.')
+    def __init__(self, /, token='', *, message='') -> None:
+        super().__init__(f'Token "{token}" is regarded as invalid or '
+                         'nonexistent and skipped parsing.'
+                         if not message else message)
