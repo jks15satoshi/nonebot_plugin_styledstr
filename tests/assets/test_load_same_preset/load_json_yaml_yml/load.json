@@ -1,0 +1,6 @@
+{
+    "test": {
+        "dirname": "assets/test_load_same_preset/load_json_yaml/load.json",
+        "status": "success"
+    }
+}

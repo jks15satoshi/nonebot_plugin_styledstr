@@ -109,6 +109,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+!tests/.env*
 
 # Spyder project settings
 .spyderproject
@@ -130,6 +131,3 @@ dmypy.json
 
 # VS Code
 .vscode/
-
-# Miscellaneous
-poetry.lock

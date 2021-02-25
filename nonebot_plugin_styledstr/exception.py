@@ -16,11 +16,14 @@ class ResourcePathError(StyledstrError):
 
 
 class PresetFileError(StyledstrError):
-    def __init__(self, preset: str) -> None:
-        super().__init__('Cannot found any valid preset file in the resource '
-                         f'path with preset {preset}.')
+    def __init__(self, /, preset='', *, message='') -> None:
+        super().__init__('Cannot find any valid preset file in the resource '
+                         f'path with preset {preset}.'
+                         if not message else message)
 
 
 class TokenError(StyledstrError):
-    def __init__(self, token: str) -> None:
-        super().__init__(f'Token "{token}" is not found so cannot be parsed.')
+    def __init__(self, /, token='', *, message='') -> None:
+        super().__init__(f'Token "{token}" is regarded as invalid or '
+                         'nonexistent and skipped parsing.'
+                         if not message else message)

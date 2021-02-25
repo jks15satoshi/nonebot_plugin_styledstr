@@ -5,7 +5,7 @@ from pydantic import BaseSettings
 
 
 class Config(BaseSettings):
-    styledstr_respath: Union[Path, str] = None
+    styledstr_respath: Union[Path, str] = Path()
     styledstr_preset: str = 'default'
 
     class Config:
