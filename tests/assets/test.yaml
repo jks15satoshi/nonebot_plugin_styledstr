@@ -1,0 +1,29 @@
+---
+test:
+  dirname: assets/test.yaml
+  status: success
+placeholder:
+  testchamber_text: $text$
+  testchamber_capital: $TEXT$
+  testchamber_underscore: $underscored_text$
+  testchamber_number: $test4science$
+  testchamber_edgecase: $Complicated__Placeholder$
+  testchamber_invalid:
+    underscore_prefix: $__main__$
+    number_prefix: $1placeholder$
+    out_of_length: $A_Complicated_Placeholder$
+  testchamber_multiple:
+    normal: $Subject$ $ACTION$ $object$.
+    with_dollar: US$ 1.00 approx. equals CA$ $VALUE$ (data provided by $PROVIDER$ on $DATE$).
+    with_invalid: The $_invalid_placeholder$ will be ignored, and the $normal_placeholder$ will not.
+    with_duplicate: Can you $CAN$ $a_can$ as a $CANNER$ $can$ $Can$ $A_Can$?
+  testchamber_logcat: $prepare$$4unforeseen$$_consequences$
+token_value: Layer 1
+token:
+  value: Layer 2
+  layer:
+    value: Layer 3
+    layer:
+      value: Layer 4
+      layer:
+        value: Layer 5

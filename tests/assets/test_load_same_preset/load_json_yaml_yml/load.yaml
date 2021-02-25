@@ -1,0 +1,3 @@
+test:
+  dirname: assets/test_load_same_preset/load_json_yaml/load.yaml
+  status: success
