@@ -10,9 +10,9 @@ class StyledstrError(Exception):
 
 
 class PresetFileError(StyledstrError):
-    def __init__(self, /, preset='', *, message='') -> None:
-        super().__init__('Cannot find any valid preset file in the resource '
-                         f'path with preset {preset}.'
+    def __init__(self, /, preset=None, respath=None, *, message='') -> None:
+        super().__init__(f'Cannot find any valid file of preset "{preset}" '
+                         f'from the resource path {respath.absolute()}'
                          if not message else message)
 
 
