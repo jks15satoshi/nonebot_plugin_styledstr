@@ -9,12 +9,6 @@ class StyledstrError(Exception):
         logger.opt(colors=True).error(f'<R><b>{self.message}</b></R>')
 
 
-class ResourcePathError(StyledstrError):
-    def __init__(self) -> None:
-        super().__init__('Resource path is not specified in the configuration '
-                         'file.')
-
-
 class PresetFileError(StyledstrError):
     def __init__(self, /, preset='', *, message='') -> None:
         super().__init__('Cannot find any valid preset file in the resource '
