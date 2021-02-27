@@ -9,6 +9,7 @@ import nonebot
 import yaml
 from nonebot.log import logger
 
+from . import config as conf
 from . import exception
 
 
@@ -25,9 +26,15 @@ class Parser(object):
         respath = config.get('styledstr_respath')
         preset = config.get('styledstr_preset')
 
-        self.__res_path = (Path(respath) if respath
-                           else Path(nb_conf.styledstr_respath))
-        self.__preset = preset if preset else nb_conf.styledstr_preset
+        init_conf = {
+            'respath': (Path(respath) if respath
+                        else Path(nb_conf.styledstr_respath)),
+            'preset': preset if preset else nb_conf.styledstr_preset
+        }
+        init = conf.Config(**init_conf)
+
+        self.__respath = init.respath
+        self.__preset = init.preset
 
     def parse(self, token: str, preset=None, **placeholders) -> str:
         """
@@ -54,8 +61,7 @@ class Parser(object):
         try:
             strings = self.__load_preset(preset)
             result = self.__token_parse(token, strings)
-        except (exception.PresetFileError, exception.ResourcePathError,
-                exception.TokenError) as err:
+        except (exception.PresetFileError, exception.TokenError) as err:
             err.log()
         else:
             if placeholders:
@@ -84,11 +90,8 @@ class Parser(object):
         is_relative_path = re.search(valid_format, str(preset))
 
         if isinstance(preset, str) and not is_relative_path:
-            if not (path := self.__res_path):
-                raise exception.ResourcePathError()
-
             valid_file = ''.join([preset, valid_format])
-            files = [file for file in path.iterdir()
+            files = [file for file in self.__respath.iterdir()
                      if re.match(valid_file, file.name, re.IGNORECASE)]
 
             if not files:
@@ -97,7 +100,7 @@ class Parser(object):
             files.sort()
             preset_file = files[0]
         else:
-            preset_file = (self.__res_path / preset
+            preset_file = (self.__respath / preset
                            if is_relative_path and isinstance(preset, str)
                            else preset)
 
