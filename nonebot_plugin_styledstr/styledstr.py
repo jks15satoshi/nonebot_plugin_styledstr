@@ -21,20 +21,14 @@ class Parser(object):
         可选参数：
         - `**config`：插件配置，覆盖 Nonebot 读取的插件配置。
         """
-        nb_conf = nonebot.get_driver().config
+        init_conf = nonebot.get_driver().config.dict()
+        if config:
+            init_conf.update(config)
 
-        respath = config.get('styledstr_respath')
-        preset = config.get('styledstr_preset')
-
-        init_conf = {
-            'respath': (Path(respath) if respath
-                        else Path(nb_conf.styledstr_respath)),
-            'preset': preset if preset else nb_conf.styledstr_preset
-        }
         init = conf.Config(**init_conf)
 
-        self.__respath = init.respath
-        self.__preset = init.preset
+        self.__respath = init.styledstr_respath
+        self.__preset = init.styledstr_preset
 
     def parse(self, token: str, preset=None, **placeholders) -> str:
         """
@@ -89,16 +83,18 @@ class Parser(object):
 
         is_relative_path = re.search(valid_format, str(preset))
 
+        # preset 为风格预设名称
         if isinstance(preset, str) and not is_relative_path:
             valid_file = ''.join([preset, valid_format])
             files = [file for file in self.__respath.iterdir()
                      if re.match(valid_file, file.name, re.IGNORECASE)]
 
             if not files:
-                raise exception.PresetFileError(preset)
+                raise exception.PresetFileError(preset, self.__respath)
 
             files.sort()
             preset_file = files[0]
+        # preset 为风格预设文件的相对或绝对路径
         else:
             preset_file = (self.__respath / preset
                            if is_relative_path and isinstance(preset, str)

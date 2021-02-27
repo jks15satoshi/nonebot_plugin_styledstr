@@ -66,6 +66,7 @@ cases_handle_multiple_placeholders = [
 @pytest.mark.usefixtures('get_parser')
 class TestHandlePlaceholder(object):
     """测试占位符处理"""
+
     @pytest.mark.parametrize('token, placeholder', cases_replace_placeholder)
     def test_replace_placeholder(self, token: str,
                                  placeholder: dict[str, Any]) -> None:

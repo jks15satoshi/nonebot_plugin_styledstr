@@ -4,8 +4,8 @@ from pydantic import BaseSettings
 
 
 class Config(BaseSettings):
-    respath: Path = Path()
-    preset: str = 'default'
+    styledstr_respath: Path = Path()
+    styledstr_preset: str = 'default'
 
     class Config:
         extra = 'ignore'
