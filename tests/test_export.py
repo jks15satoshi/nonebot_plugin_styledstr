@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Generator
+from typing import Any
 
 import pytest
 
@@ -22,56 +22,6 @@ cases_custom_config = [
 ]
 
 
-class TestImport(object):
-    """测试使用导入创建解析器对象"""
-
-    @pytest.fixture()
-    def import_module(self, request, setup) -> Generator[Any, None, None]:
-        """
-        导入模块固件。
-
-        参数：
-        - `request`：内置固件，用于将导入的模块传入实例变量。
-        - `setup`：初始化固件。
-
-        生成：
-        - `Generator[Any, None, None]`：生成 `styledstr` 模块的生成器。
-        """
-        from nonebot_plugin_styledstr import styledstr
-
-        if request.cls:
-            request.cls.styledstr = styledstr
-        yield styledstr
-
-    def test_default_import(self, import_module) -> None:
-        """
-        测试默认配置导入。
-
-        测试预期：正常解析字符串标签。
-
-        参数：
-        - `import_module`：导入模块固件。
-        """
-        parser = self.styledstr.Parser()
-        assert parser.parse('test.status') == 'success'
-
-    @pytest.mark.parametrize('config, expected_dirname', cases_custom_config)
-    @pytest.mark.usefixtures('import_module')
-    def test_import_with_custom_config(self, config: dict[str, Any],
-                                       expected_dirname: str) -> None:
-        """
-        测试自定义配置导入。
-
-        测试预期：根据配置创建解析器对象并加载配置所指定的预设文件。
-
-        参数：
-        - `config: dict[str, Any]`：自定义配置。
-        - `expected_dirname: str`：预期加载文件。
-        """
-        parser = self.styledstr.Parser(**config)
-        assert parser.parse('test.dirname') == expected_dirname
-
-
 @pytest.mark.usefixtures('setup')
 class TestExport(object):
     """测试通过 require 获取或创建解析器对象"""
@@ -84,7 +34,7 @@ class TestExport(object):
         """
         from nonebot import require
 
-        parser = require('nonebot_plugin_styledstr').parser
+        parser = require('nonebot_plugin_styledstr').init()
         assert parser.parse('test.status') == 'success'
 
     @pytest.mark.parametrize('config, expected_dirname', cases_custom_config)

@@ -2,6 +2,7 @@
 test:
   dirname: assets/test.yaml
   status: success
+
 placeholder:
   testchamber_text: $text$
   testchamber_capital: $TEXT$
@@ -18,6 +19,11 @@ placeholder:
     with_invalid: The $_invalid_placeholder$ will be ignored, and the $normal_placeholder$ will not.
     with_duplicate: Can you $CAN$ $a_can$ as a $CANNER$ $can$ $Can$ $A_Can$?
   testchamber_logcat: $prepare$$4unforeseen$$_consequences$
+  testchamber_with_random_values:
+    - $test$ 1
+    - $test$ 2
+    - $text$ 3
+
 token_value: Layer 1
 token:
   value: Layer 2
@@ -27,3 +33,8 @@ token:
       value: Layer 4
       layer:
         value: Layer 5
+
+token_with_multiple_values:
+  - value 1
+  - value 2
+  - value 3

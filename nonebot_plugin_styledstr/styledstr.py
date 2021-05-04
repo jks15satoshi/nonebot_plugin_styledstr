@@ -1,5 +1,6 @@
 """风格化字符串解析器"""
 import json
+import random
 import re
 from functools import reduce
 from pathlib import Path
@@ -19,7 +20,7 @@ class Parser(object):
         实例化解析器。
 
         可选参数：
-        - `**config`：插件配置，覆盖 Nonebot 读取的插件配置。
+        - `**config`：插件配置，覆盖 NoneBot 读取的插件配置。
         """
         init_conf = nonebot.get_driver().config.dict()
         if config:
@@ -163,10 +164,12 @@ class Parser(object):
         - `preset_contents: dict[str, Any]`：风格预设内容。
 
         异常：
-        - `exception.TokenError`：字符串标签不存在于风格预设内容中。
+        - `exception.TokenError`：字符串标签不存在于风格预设内容中，或其对应内
+          容不是字面值或列表。
 
         返回：
-        - `str`：标签所指示的字符串内容。
+        - `str`：标签所指示的字符串内容。特别地，当 `preset_contents` 中字符串
+          标签所对应的内容为列表时，则从中随机抽取值返回。
         """
         try:
             result = reduce(lambda key, val: key[val], token.split('.'),
@@ -174,7 +177,11 @@ class Parser(object):
         except (KeyError, TypeError):
             raise exception.TokenError(token)
         else:
-            if not isinstance(result, str):
-                message = f'The value of the token "{token}" is not a string.'
+            if isinstance(result, list):
+                return str(random.choice(result))
+            elif isinstance(result, (str, int, float, bool)):
+                return str(result)
+            else:
+                message = (f'The value of the token "{token}" is not a '
+                           'literal or list.')
                 raise exception.TokenError(message=message)
-            return result

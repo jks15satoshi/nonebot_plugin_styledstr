@@ -1,6 +1,6 @@
 # nonebot-plugin-styledstr
 
-Nonebot 2 风格化字符串管理插件。
+NoneBot 2 风格化字符串管理插件。
 
 [![time tracker](https://wakatime.com/badge/github/jks15satoshi/nonebot_plugin_styledstr.svg)](https://wakatime.com/badge/github/jks15satoshi/nonebot_plugin_styledstr)
 ![PyPI](https://img.shields.io/pypi/v/nonebot-plugin-styledstr)
@@ -9,7 +9,7 @@ Nonebot 2 风格化字符串管理插件。
 [![codecov](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr/branch/main/graph/badge.svg?token=8M2AHA8J3M)](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr)
 ![GitHub](https://img.shields.io/github/license/jks15satoshi/nonebot_plugin_styledstr)
 
-> 由于本人 Python 水平低下，因此源码可能会令人不适，烦请谅解。
+> 由于本人 Python 仍在学习阶段，因此源码可能会令人不适，烦请谅解。
 
 ## 介绍
 
@@ -63,7 +63,7 @@ pip install nonebot-plugin-styledstr
 
 ### 配置
 
-> 注意：使用该插件前，请务必在项目中创建存放字符串资源的目录，并通过下面的配置项指定其为资源目录。关于如何设置插件配置项，参考 Nonebot 2 官方文档的 [基本配置](https://v2.nonebot.dev/guide/basic-configuration.html) 章节。
+> 注意：使用该插件前，请务必在项目中创建存放字符串资源的目录，并通过下面的配置项指定其为资源目录。关于如何设置插件配置项，参考 NoneBot 2 官方文档的 [基本配置](https://v2.nonebot.dev/guide/basic-configuration.html) 章节。
 
 该插件可通过在配置文件中添加如下配置项对部分功能进行配置。
 
@@ -78,37 +78,18 @@ pip install nonebot-plugin-styledstr
 
 ### 加载插件并获取解析器对象
 
-参考 Nonebot 2 官方文档的 [加载插件](https://v2.nonebot.dev/guide/loading-a-plugin.html) 章节，在项目中加载该插件。
-
-该插件可以使用 `import` 或通过 `nonebot.plugin.require` 获取解析器。
-
-使用 `import` 获取解析器需自行创建解析器对象：
-
-````python
->>> from nonebot_plugin_styledstr import styledstr
-# 使用 Nonebot 初始化时读取的配置
->>> parser = styledstr.Parser()
-# 或使用自定义配置
->>> parser = styledstr.Parser(styledstr_preset='custom')
-````
-
-使用 `require` 方式获取解析器时，若无需自定义配置可直接获取解析器对象：
+参考 NoneBot 2 官方文档的 [加载插件](https://v2.nonebot.dev/guide/loading-a-plugin.html) 章节，在项目中加载该插件：
 
 ````python
 >>> from nonebot import require
->>> parser = require('nonebot_plugin_styledstr').parser
-````
-
-若需要自定义配置也可通过以下方式创建解析器对象：
-
-````python
->>> from nonebot import require
-# 方式 1
+# 以默认配置获取解析器对象（.env.* 文件或 nonebot 初始化时的配置）
+>>> parser = require('nonebot_plugin_styledstr').init()
+# 使用 nonebot.config 配置获取解析器对象
 >>> import nonebot
 >>> config = nonebot.get_driver().config
 >>> config.styledstr_preset = 'custom'
 >>> parser = require('nonebot_plugin_styledstr').init(config)
-# 方式 2
+# 使用字典配置获取解析器对象
 >>> from pathlib import Path
 >>> config = {
 ...     'styledstr_respath': Path('path/to/respath'),

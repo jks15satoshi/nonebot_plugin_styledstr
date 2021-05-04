@@ -27,7 +27,7 @@ def setup() -> None:
 
 @pytest.fixture(scope='class')
 def get_parser(request, setup) -> Generator[Any, None, None]:
-    parser = require('nonebot_plugin_styledstr').parser
+    parser = require('nonebot_plugin_styledstr').init()
 
     if request.cls:
         request.cls.parser = parser

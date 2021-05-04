@@ -119,6 +119,16 @@ class TestHandlePlaceholder(object):
         text = self.parser.parse(token, **placeholders)
         assert text == expected
 
+    def test_handle_placeholder_with_random_value(self) -> None:
+        """
+        测试随机抽取内容的占位符处理。
+
+        测试预期：`$test$` 占位符替换为 `TEXT`。
+        """
+        text = self.parser.parse('placeholder.testchamber_with_random_values',
+                                 test='TEXT')
+        assert text in {'TEXT 1', 'TEXT 2', '$text$ 3'}
+
     def test_logging_while_handling_placeholders(self, caplog) -> None:
         """
         测试处理占位符时的日志输出。
