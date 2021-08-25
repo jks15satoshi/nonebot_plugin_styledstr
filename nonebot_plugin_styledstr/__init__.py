@@ -1,25 +1,21 @@
 """风格化字符串管理"""
-from pathlib import Path
-from typing import Any, Union
+from importlib.metadata import version
+from typing import Any, Dict, Union
 
-import toml
 from nonebot import config as nb_conf
 from nonebot import export
 from nonebot.log import logger
 
 from .styledstr import Parser
 
-
 # 获取与日志输出版本信息
-with (Path(__file__).parents[1] / 'pyproject.toml').open() as f:
-    __version__ = toml.load(f).get('tool').get('poetry').get('version')
-
-logger.info(f'Plugin loaded: nonebot_plugin_styledstr v{__version__}')
+logger.info('Plugin loaded: nonebot_plugin_styledstr '
+            f'v{version("nonebot_plugin_styledstr")}')
 
 
 # 导出创建解析器对象方法
 @export()
-def init(config: Union[nb_conf.Config, dict[str, Any], None] = None) -> Parser:
+def init(config: Union[nb_conf.Config, Dict[str, Any], None] = None) -> Parser:
     """
     创建解析器对象。
 

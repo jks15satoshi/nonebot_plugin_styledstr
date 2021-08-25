@@ -4,7 +4,7 @@ import random
 import re
 from functools import reduce
 from pathlib import Path
-from typing import Any, Union
+from typing import Any, Dict, Optional, Union
 
 import nonebot
 import yaml
@@ -15,6 +15,7 @@ from . import exception
 
 
 class Parser(object):
+
     def __init__(self, **config) -> None:
         """
         实例化解析器。
@@ -31,7 +32,10 @@ class Parser(object):
         self.__respath = init.styledstr_respath
         self.__preset = init.styledstr_preset
 
-    def parse(self, token: str, preset=None, **placeholders) -> str:
+    def parse(self,
+              token: str,
+              preset: Optional[Union[str, Path]] = None,
+              **placeholders) -> str:
         """
         解析字符串标签，根据风格预设配置信息获取字符串内容，并替换内容中的占位
         符（如果存在）。
@@ -65,7 +69,7 @@ class Parser(object):
 
         return result
 
-    def __load_preset(self, preset: Union[str, Path]) -> dict[str, Any]:
+    def __load_preset(self, preset: Union[str, Path]) -> Dict[str, Any]:
         """
         加载风格预设文件内容。
 
@@ -77,7 +81,7 @@ class Parser(object):
         - `exception.PresetFileError`：指定预设名称错误或预设文件不存在。
 
         返回:
-        - `dict[str, Any]`：风格预设内容。
+        - `Dict[str, Any]`：风格预设内容。
         """
         valid_format = r'\.(?:json|ya?ml)'
         preset_file = None
@@ -87,8 +91,10 @@ class Parser(object):
         # preset 为风格预设名称
         if isinstance(preset, str) and not is_relative_path:
             valid_file = ''.join([preset, valid_format])
-            files = [file for file in self.__respath.iterdir()
-                     if re.match(valid_file, file.name, re.IGNORECASE)]
+            files = [
+                file for file in self.__respath.iterdir()
+                if re.match(valid_file, file.name, re.IGNORECASE)
+            ]
 
             if not files:
                 raise exception.PresetFileError(preset, self.__respath)
@@ -97,9 +103,8 @@ class Parser(object):
             preset_file = files[0]
         # preset 为风格预设文件的相对或绝对路径
         else:
-            preset_file = (self.__respath / preset
-                           if is_relative_path and isinstance(preset, str)
-                           else preset)
+            preset_file = Path(self.__respath / preset if is_relative_path
+                               and isinstance(preset, str) else preset)
 
             if not preset_file.exists():
                 message = (f'Preset file {preset_file.absolute()} does not '
@@ -139,8 +144,8 @@ class Parser(object):
         split_str = re.split(placeholder, contents)
 
         for i, item in enumerate(split_str):
-            if (re.match(placeholder, item) and
-                    (val := item[1:-1].lower()) not in blacklist):
+            if (re.match(placeholder, item)
+                    and (val := item[1:-1].lower()) not in blacklist):
                 replaced = placeholders.get(val)
                 if replaced:
                     split_str[i] = str(replaced)
@@ -155,13 +160,13 @@ class Parser(object):
         return ''.join(split_str)
 
     @staticmethod
-    def __token_parse(token: str, preset_contents: dict[str, Any]) -> str:
+    def __token_parse(token: str, preset_contents: Dict[str, Any]) -> str:
         """
         解析字符串标签。
 
         参数：
         - `token: str`：字符串标签。
-        - `preset_contents: dict[str, Any]`：风格预设内容。
+        - `preset_contents: Dict[str, Any]`：风格预设内容。
 
         异常：
         - `exception.TokenError`：字符串标签不存在于风格预设内容中，或其对应内

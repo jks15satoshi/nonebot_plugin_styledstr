@@ -29,30 +29,34 @@ class StyledstrError(Exception):
 
 class PresetFileError(StyledstrError):
     """
-    预设文件加载错误。
+    异常初始化。
 
-    基类：
-    - `exception.StyledstrError`
+    提供两种异常消息格式：
+    - 默认格式：提供参数 `preset` 与 `respath`，此时日志输出为 `respath` 下不存
+      在 `preset` 风格预设；
+    - 自定义格式：提供参数 `message`，此时日志输出消息内容自定义。
+
+    关键字参数：
+    - `preset: Optional[str]`：预设名称。
+    - `respath: Optional[pathlib.Path]`：资源目录路径。
+    - `message: str`：日志信息。默认为空字符串。
     """
 
-    def __init__(self, /, preset: Optional[str] = None,
-                 respath: Optional[Path] = None, *, message: str = '') -> None:
-        """
-        异常初始化。
+    def __init__(self,
+                 /,
+                 preset: Optional[str] = None,
+                 respath: Optional[Path] = None,
+                 *,
+                 message: str = '') -> None:
+        if message:
+            msg = message
+        elif preset and respath:
+            msg = (f'Cannot find any valid file for preset "{preset}" from '
+                   f'the resource path {respath.absolute()}.')
+        else:
+            msg = 'Cannot find any valid file for the indicated preset.'
 
-        提供两种异常消息格式：
-        - 默认格式：提供参数 `preset` 与 `respath`，此时日志输出为 `respath` 下
-          不存在 `preset` 风格预设；
-        - 自定义格式：提供参数 `message`，此时日志输出消息内容自定义。
-
-        关键字参数：
-        - `preset: Optional[str]`：预设名称。
-        - `respath: Optional[pathlib.Path]`：资源目录路径。
-        - `message: str`：日志信息。默认为空字符串。
-        """
-        super().__init__(f'Cannot find any valid file of preset "{preset}" '
-                         f'from the resource path {respath.absolute()}'
-                         if not message else message)
+        super().__init__(msg)
 
 
 class TokenError(StyledstrError):
@@ -69,6 +73,6 @@ class TokenError(StyledstrError):
     """
 
     def __init__(self, /, token: str = '', *, message: str = '') -> None:
-        super().__init__(f'Token "{token}" is regarded as invalid or '
-                         'nonexistent and skipped parsing.'
-                         if not message else message)
+        super().__init__(
+            f'Token "{token}" is regarded as invalid or '
+            'nonexistent and skipped parsing.' if not message else message)
