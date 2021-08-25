@@ -1,24 +1,20 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict
 
 import pytest
 
-
 cases_custom_config = [
-    ({'styledstr_preset': 'alter'}, 'assets/alter.yaml'),
-    (
-        {'styledstr_respath': (Path(__file__).parent / 'assets' /
-                               'test_import')},
-        'assets/test_import/test.yaml'
-    ),
-    (
-        {
-            'styledstr_respath': (Path(__file__).parent / 'assets' /
-                                  'test_import'),
-            'styledstr_preset': 'alter'
-        },
-        'assets/test_import/alter.yaml'
-    )
+    ({
+        'styledstr_preset': 'alter'
+    }, 'assets/alter.yaml'),
+    ({
+        'styledstr_respath': (Path(__file__).parent / 'assets' / 'test_import')
+    }, 'assets/test_import/test.yaml'),
+    ({
+        'styledstr_respath':
+            (Path(__file__).parent / 'assets' / 'test_import'),
+        'styledstr_preset': 'alter'
+    }, 'assets/test_import/alter.yaml')
 ]
 
 
@@ -38,7 +34,7 @@ class TestExport(object):
         assert parser.parse('test.status') == 'success'
 
     @pytest.mark.parametrize('config, expected_dirname', cases_custom_config)
-    def test_export_with_custom_attr_config(self, config: dict[str, Any],
+    def test_export_with_custom_attr_config(self, config: Dict[str, Any],
                                             expected_dirname: str) -> None:
         """
         测试自定义配置（参数）创建解析器对象。
@@ -47,7 +43,7 @@ class TestExport(object):
         预设文件。
 
         参数：
-        - `config: dict[str, Any]`：自定义类型。
+        - `config: Dict[str, Any]`：自定义类型。
         - `expected_dirname: str`：预期加载文件。
         """
         from nonebot import require
@@ -56,7 +52,7 @@ class TestExport(object):
         assert parser.parse('test.dirname') == expected_dirname
 
     @pytest.mark.parametrize('config, expected_dirname', cases_custom_config)
-    def test_export_with_custom_nonebot_config(self, config: dict[str, Any],
+    def test_export_with_custom_nonebot_config(self, config: Dict[str, Any],
                                                expected_dirname: str) -> None:
         """
         测试自定义配置（`nonebot.config.Config` 对象）创建解析器对象。
@@ -65,7 +61,7 @@ class TestExport(object):
         置所指定的预设文件。
 
         参数：
-        - `config: dict[str, Any]`：自定义类型。
+        - `config: Dict[str, Any]`：自定义类型。
         - `expected_dirname: str`：预期加载文件。
         """
         from nonebot import config as nb_conf

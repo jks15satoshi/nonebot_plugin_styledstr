@@ -1,8 +1,7 @@
 from pathlib import Path
-from typing import Union
+from typing import List, Union
 
 import pytest
-
 
 assets_path = Path(__file__).parent / 'assets'
 
@@ -30,24 +29,19 @@ class TestLoadPreset(object):
         """
         from nonebot import require
 
-        config = {
-            'styledstr_respath': path,
-            'styledstr_preset': 'load'
-        }
+        config = {'styledstr_respath': path, 'styledstr_preset': 'load'}
         parser = require('nonebot_plugin_styledstr').init(config)
 
         assert parser.parse('test.dirname').endswith(expected)
 
-    @pytest.mark.parametrize('preset, expected', [
-        ('alter', 'assets/alter.yaml'),
-        ('alter.yml', 'assets/alter.yml'),
-        ('test_import/test.yaml', 'assets/test_import/test.yaml'),
-        (assets_path / 'test_import' / 'alter.yaml',
-         'assets/test_import/alter.yaml')
-    ])
+    @pytest.mark.parametrize(
+        'preset, expected',
+        [('alter', 'assets/alter.yaml'), ('alter.yml', 'assets/alter.yml'),
+         ('test_import/test.yaml', 'assets/test_import/test.yaml'),
+         (assets_path / 'test_import' / 'alter.yaml',
+          'assets/test_import/alter.yaml')])
     @pytest.mark.usefixtures('get_parser')
-    def test_load_preset_while_parsing_token(self,
-                                             preset: Union[str, Path],
+    def test_load_preset_while_parsing_token(self, preset: Union[str, Path],
                                              expected: str) -> None:
         """
         测试以自定义风格预设获取内容。
@@ -60,17 +54,17 @@ class TestLoadPreset(object):
         """
         assert self.parser.parse('test.dirname', preset=preset) == expected
 
-    @pytest.mark.parametrize('preset, expected', [
-        ('default', ['Cannot find', 'preset default']),
-        ('alter.json', ['Preset file', 'assets/alter.json']),
-        ('test_import/test.json', ['Preset file',
-                                   'assets/test_import/test.json']),
-        (assets_path / 'test_import' / 'alter.json',
-         ['Perset file', 'assets/test_import/alter.json'])
-    ])
+    @pytest.mark.parametrize(
+        'preset, expected',
+        [('default', ['Cannot find', 'preset default']),
+         ('alter.json', ['Preset file', 'assets/alter.json']),
+         ('test_import/test.json',
+          ['Preset file', 'assets/test_import/test.json']),
+         (assets_path / 'test_import' / 'alter.json',
+          ['Perset file', 'assets/test_import/alter.json'])])
     @pytest.mark.usefixtures('get_parser', 'caplog')
     def test_logging_while_parsing_token(self, preset: Union[str, Path],
-                                         expected: list[str]) -> None:
+                                         expected: List[str]) -> None:
         """
         测试日志输出。
 

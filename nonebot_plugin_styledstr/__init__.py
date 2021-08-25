@@ -8,7 +8,7 @@ from nonebot.log import logger
 
 from .styledstr import Parser
 
-# 获取与日志输出版本信息
+# 日志输出版本信息
 logger.info('Plugin loaded: nonebot_plugin_styledstr '
             f'v{version("nonebot_plugin_styledstr")}')
 

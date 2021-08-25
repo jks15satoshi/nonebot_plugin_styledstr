@@ -10,7 +10,6 @@ from _pytest.logging import caplog as _caplog
 from loguru import logger
 from nonebot import require
 
-
 sys.path.insert(0, os.path.abspath('../nonebot_plugin_styledstr'))
 
 
@@ -36,7 +35,9 @@ def get_parser(request, setup) -> Generator[Any, None, None]:
 
 @pytest.fixture()
 def caplog(_caplog, request) -> Generator[Any, None, None]:
+
     class PropogateHandler(logging.Handler):
+
         def emit(self, record):
             logging.getLogger(record.name).handle(record)
 
