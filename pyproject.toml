@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.8"
 pyyaml = "^5.4.1"
-nonebot2 = "^2.0.0-alpha.13"
+nonebot2 = "^2.0.0-alpha.15"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
