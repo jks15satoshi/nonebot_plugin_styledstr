@@ -186,7 +186,7 @@ class Parser(object):
                 return str(random.choice(result))
             if isinstance(result, (str, int, float, bool)):
                 return str(result)
-            else:
-                message = (f'The value of the token "{token}" is not a '
-                           'literal or list.')
-                raise exception.TokenError(message=message)
+
+            message = (
+                f'The value of the token "{token}" is not a literal or list.')
+            raise exception.TokenError(message=message)
