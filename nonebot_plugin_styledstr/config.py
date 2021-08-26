@@ -1,3 +1,4 @@
+"""插件配置"""
 from pathlib import Path
 
 from pydantic import BaseSettings
