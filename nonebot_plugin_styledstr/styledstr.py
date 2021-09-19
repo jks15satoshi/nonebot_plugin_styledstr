@@ -103,8 +103,11 @@ class Parser(object):
             preset_file = files[0]
         # preset 为风格预设文件的相对或绝对路径
         else:
-            preset_file = Path(self.__respath / preset if is_relative_path
-                               and isinstance(preset, str) else preset)
+            if is_relative_path and isinstance(preset, str):
+                preset_file = (Path(preset) if Path(preset).is_file() else
+                               self.__respath / preset)
+            else:
+                preset_file = Path(preset)
 
             if not preset_file.exists():
                 message = (f'Preset file {preset_file.absolute()} does not '

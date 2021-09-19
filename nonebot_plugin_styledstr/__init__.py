@@ -5,8 +5,8 @@ from typing import Any, Dict, Union
 
 import toml
 from nonebot import config as nb_conf
-from nonebot import export
 from nonebot.log import logger
+from nonebot.plugin.export import export
 
 from .styledstr import Parser
 
