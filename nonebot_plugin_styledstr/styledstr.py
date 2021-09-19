@@ -86,10 +86,10 @@ class Parser(object):
         valid_format = r'\.(?:json|ya?ml)'
         preset_file = None
 
-        is_relative_path = re.search(valid_format, str(preset))
+        is_file_path = re.search(valid_format, str(preset))
 
         # preset 为风格预设名称
-        if isinstance(preset, str) and not is_relative_path:
+        if isinstance(preset, str) and not is_file_path:
             valid_file = ''.join([preset, valid_format])
             files = [
                 file for file in self.__respath.iterdir()
@@ -103,11 +103,11 @@ class Parser(object):
             preset_file = files[0]
         # preset 为风格预设文件的相对或绝对路径
         else:
-            if is_relative_path and isinstance(preset, str):
+            if isinstance(preset, Path):
+                preset_file = preset
+            else:
                 preset_file = (Path(preset) if Path(preset).is_file() else
                                self.__respath / preset)
-            else:
-                preset_file = Path(preset)
 
             if not preset_file.exists():
                 message = (f'Preset file {preset_file.absolute()} does not '
