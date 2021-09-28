@@ -9,8 +9,6 @@ NoneBot 2 风格化字符串管理插件。
 [![codecov](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr/branch/main/graph/badge.svg?token=8M2AHA8J3M)](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr)
 ![GitHub](https://img.shields.io/github/license/jks15satoshi/nonebot_plugin_styledstr)
 
-> 由于本人 Python 仍在学习阶段，因此源码可能会令人不适，烦请谅解。
-
 ## 介绍
 
 风格化字符串管理，或称字符串资源管理，即通过字符串标签来标识和获取一个字符串内容。设计初衷是用于灵活控制机器人的输出内容。
@@ -39,23 +37,25 @@ NoneBot 2 风格化字符串管理插件。
 
 ## 安装
 
-> 注意：Python 版本不应低于 3.8。
+> **注意：** Python 版本不应低于 3.8。
 
 ### 使用 `nb-cli` 安装
 
-````shell
+````bash
 nb plugin install nonebot-plugin-styledstr
 ````
 
 ### 使用 Poetry 安装
 
-````shell
+> **注意：** 需要安装 [Poetry](https://python-poetry.org/docs/)。
+
+````bash
 poetry add nonebot-plugin-styledstr
 ````
 
 ### 使用 `pip` 安装
 
-````shell
+````bash
 pip install nonebot-plugin-styledstr
 ````
 
@@ -63,7 +63,7 @@ pip install nonebot-plugin-styledstr
 
 ### 配置
 
-> 注意：使用该插件前，请务必在项目中创建存放字符串资源的目录，并通过下面的配置项指定其为资源目录。关于如何设置插件配置项，参考 NoneBot 2 官方文档的 [基本配置](https://v2.nonebot.dev/guide/basic-configuration.html) 章节。
+> **注意：** 使用该插件前，请务必在项目中创建存放字符串资源的目录，并通过下面的配置项指定其为资源目录。关于如何设置插件配置项，参考 NoneBot 2 官方文档的 [基本配置](https://v2.nonebot.dev/guide/basic-configuration.html) 章节。
 
 该插件可通过在配置文件中添加如下配置项对部分功能进行配置。
 
@@ -101,6 +101,22 @@ pip install nonebot-plugin-styledstr
 ## 使用
 
 参见 [使用用例](docs/usage.md) 了解该插件的用法。
+
+## 部署
+
+如果你想要协助维护本项目，你可以安装以下方式将项目部署至本地：
+
+> **注意：** 直接从本存储库部署的项目可能包含未经测试的代码，这可能会导致不可预测的行为，请 **不要运行在生产环境中**。
+
+````bash
+git clone https://github.com/jks15satoshi/nonebot_plugin_styledstr.git
+cd nonebot_plugin_styledstr
+# 推荐以下述方式安装依赖（需要安装 Poetry）
+poetry install
+# 或者使用 pip 安装依赖，建议参照 Python 文档创建并激活虚拟环境后安装
+# https://docs.python.org/zh-cn/3/tutorial/venv.html#creating-virtual-environments
+pip install -r requirements.txt
+````
 
 ## 许可协议
 
