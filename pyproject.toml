@@ -20,7 +20,6 @@ nonebot2 = "^2.0.0-alpha.15"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
-pigar = "^0.10.0"
 yapf = "^0.31.0"
 
 [build-system]
