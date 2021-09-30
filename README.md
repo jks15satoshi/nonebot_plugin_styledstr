@@ -5,9 +5,10 @@ NoneBot 2 风格化字符串管理插件。
 [![time tracker](https://wakatime.com/badge/github/jks15satoshi/nonebot_plugin_styledstr.svg)](https://wakatime.com/badge/github/jks15satoshi/nonebot_plugin_styledstr)
 ![PyPI](https://img.shields.io/pypi/v/nonebot-plugin-styledstr)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/nonebot-plugin-styledstr)
+![GitHub](https://img.shields.io/github/license/jks15satoshi/nonebot_plugin_styledstr)
 [![CodeFactor](https://www.codefactor.io/repository/github/jks15satoshi/nonebot_plugin_styledstr/badge)](https://www.codefactor.io/repository/github/jks15satoshi/nonebot_plugin_styledstr)
 [![codecov](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr/branch/main/graph/badge.svg?token=8M2AHA8J3M)](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr)
-![GitHub](https://img.shields.io/github/license/jks15satoshi/nonebot_plugin_styledstr)
+[![Unit test](https://github.com/jks15satoshi/nonebot_plugin_styledstr/actions/workflows/unittest.yml/badge.svg)](https://github.com/jks15satoshi/nonebot_plugin_styledstr/actions/workflows/unittest.yml)
 
 ## 介绍
 
@@ -37,9 +38,11 @@ NoneBot 2 风格化字符串管理插件。
 
 ## 安装
 
-> **注意：** Python 版本不应低于 3.8。
+安装此插件需要 Python 3.8 及以上版本。
 
 ### 使用 `nb-cli` 安装
+
+> **注意：** 请确认已安装 [nb-cli](https://github.com/nonebot/nb-cli)。
 
 ````bash
 nb plugin install nonebot-plugin-styledstr
@@ -47,7 +50,7 @@ nb plugin install nonebot-plugin-styledstr
 
 ### 使用 Poetry 安装
 
-> **注意：** 需要安装 [Poetry](https://python-poetry.org/docs/)。
+> **注意：** 需要另外安装 [Poetry](https://python-poetry.org/docs/)。
 
 ````bash
 poetry add nonebot-plugin-styledstr
@@ -106,16 +109,16 @@ pip install nonebot-plugin-styledstr
 
 如果你想要协助维护本项目，你可以安装以下方式将项目部署至本地：
 
-> **注意：** 直接从本存储库部署的项目可能包含未经测试的代码，这可能会导致不可预测的行为，请 **不要运行在生产环境中**。
+> **警告：** 直接从本存储库部署的项目可能包含未经测试的代码，这可能会导致不可预测的行为，请 **不要运行在生产环境中**。
 
 ````bash
 git clone https://github.com/jks15satoshi/nonebot_plugin_styledstr.git
 cd nonebot_plugin_styledstr
-# 推荐以下述方式安装依赖（需要安装 Poetry）
+# 推荐以下述方式安装依赖（需要另外安装 Poetry）
 poetry install
 # 或者使用 pip 安装依赖，建议参照 Python 文档创建并激活虚拟环境后安装
 # https://docs.python.org/zh-cn/3/tutorial/venv.html#creating-virtual-environments
-pip install -r requirements.txt
+pip install .
 ````
 
 ## 许可协议
