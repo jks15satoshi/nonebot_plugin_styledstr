@@ -1,6 +1,10 @@
 name: Unit test
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+      - nonebot_plugin_styledstr/**
+      - tests/**
 
 jobs:
   unittest:

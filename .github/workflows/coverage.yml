@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - nonebot_plugin_styledstr/**
+      - tests/**
 
 jobs:
   codecov:
