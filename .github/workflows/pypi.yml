@@ -8,13 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
       - name: Build and publish
-        uses: d1618033/gh-action-python-publish-using-poetry@master
+        uses: JRubics/poetry-publish@v1.8
         with:
-          pypi_username: ${{ secrets.PYPI_USERNAME }}
-          pypi_password: ${{ secrets.PYPI_PASSWORD }}
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
