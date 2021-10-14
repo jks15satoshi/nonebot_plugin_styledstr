@@ -15,7 +15,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pyyaml = "^5.4.1"
+pyyaml = ">=5.4.1,<7.0.0"
 nonebot2 = "^2.0.0-alpha.15"
 
 [tool.poetry.dev-dependencies]
