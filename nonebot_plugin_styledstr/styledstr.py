@@ -173,7 +173,7 @@ class Parser(object):
 
         异常：
         - `exception.TokenError`：字符串标签不存在于风格预设内容中，或其对应内
-          容不是字面值或列表。
+          容不是数值、布尔值、字符串或列表。
 
         返回：
         - `str`：标签所指示的字符串内容。特别地，当 `preset_contents` 中字符串
@@ -191,5 +191,6 @@ class Parser(object):
                 return str(result)
 
             message = (
-                f'The value of the token "{token}" is not a literal or list.')
+                f'The value of the token "{token}" is not a numeric, boolean, '
+                'string or list.')
             raise exception.TokenError(message=message)
