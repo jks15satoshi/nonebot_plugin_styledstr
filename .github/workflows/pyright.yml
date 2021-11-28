@@ -7,10 +7,14 @@ on:
 
 jobs:
   pyright:
-    name: pyright
+    name: Static type check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pip install -U pip
+          pip install .
       - uses: jordemort/action-pyright@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
