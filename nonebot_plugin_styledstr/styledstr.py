@@ -15,7 +15,7 @@ from . import exception
 from .utils import deprecated
 
 try:
-    import regex as re
+    import regex as re  # type: ignore
 except ImportError:
     logger.debug('Failed to import regex, use re instead.')
     import re
