@@ -20,6 +20,7 @@ class StyledstrError(Exception):
         参数：
         - `message: str`：日志信息。
         """
+        super().__init__(message)
         self.message = message
 
     def log(self) -> None:
