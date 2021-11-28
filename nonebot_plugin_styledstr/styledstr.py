@@ -57,15 +57,14 @@ class Parser(object):
         符（如果存在）。
 
         参数：
-        - `tag: str`：字符串标签。
-
-        关键字参数：
+        - `tag: str`：字符串标签；
+        - `*args: Any`：将格式化的内容；
         - `preset: Union[str, pathlib.Path]`：风格预设。默认为项目配置中设置的
           风格预设，未在配置中设置时为 `default`。
           - 当 `preset` 为 `str` 且 `preset` 包含预设文件后缀名时，将视为相对于
             资源目录的文件相对路径，否则将视为风格预设名称；
           - 当 `preset` 为 `pathlib.Path` 对象时，视为文件绝对路径。
-        - `**kwargs`：将被替换的占位符及替换内容。
+        - `**kwargs`：将格式化的占位符名称及替换内容。
 
         返回：
         - `nonebot.adapters.Message`：根据标签获取的字符串。异常时返回空
@@ -75,11 +74,12 @@ class Parser(object):
 
         try:
             strings: Dict[str, Any] = self.__load_preset(preset)
-            raw = self.__token_parse(tag, strings)
+            raw = self.__tag_parse(tag, strings)
         except (exception.PresetFileError, exception.TokenError) as err:
             err.log()
+            return
         else:
-            logger.debug(f'Token "{tag}" parsed as expected.')
+            logger.debug(f'Tag "{tag}" parsed as expected.')
             raw = self.__convert_formatter(raw)
             return Message.template(raw).format(*args, **kwargs)
 
@@ -166,7 +166,7 @@ class Parser(object):
         return ''.join(split_str)
 
     @staticmethod
-    def __token_parse(tag: str, preset_contents: Dict[str, Any]) -> str:
+    def __tag_parse(tag: str, preset_contents: Dict[str, Any]) -> str:
         """
         解析字符串标签。
 
