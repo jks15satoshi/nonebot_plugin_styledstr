@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-styledstr"
-version = "1.0.1"
+version = "1.0.2"
 description = "A styled string management plugin for NoneBot 2"
 authors = ["Satoshi Jek <jks15satoshi@gmail.com>"]
 license = "MIT"
@@ -16,7 +16,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 pyyaml = ">=5.4.1,<7.0.0"
-nonebot2 = ">=2.0.0-alpha.11,<=2.0.0-alpha.15"
+nonebot2 = "^2.0.0-alpha.11"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
