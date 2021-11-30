@@ -1,4 +1,4 @@
-name: Static type check
+name: Static code check
 
 on:
   pull_request:
@@ -6,8 +6,22 @@ on:
       - nonebot_plugin_styledstr/**
 
 jobs:
+  pylint:
+    name: pylint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pip install -U pip
+          pip install .
+      - uses: dciborow/action-pylint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
   pyright:
-    name: Static type check
+    name: pyright
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
