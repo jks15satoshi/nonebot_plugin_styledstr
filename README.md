@@ -10,6 +10,12 @@ NoneBot 2 风格化字符串管理插件。
 [![codecov](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr/branch/main/graph/badge.svg?token=8M2AHA8J3M)](https://codecov.io/gh/jks15satoshi/nonebot_plugin_styledstr)
 [![Unit test](https://github.com/jks15satoshi/nonebot_plugin_styledstr/actions/workflows/unittest.yml/badge.svg)](https://github.com/jks15satoshi/nonebot_plugin_styledstr/actions/workflows/unittest.yml)
 
+## 重要通知
+
+该项目已迁移至 [echobot-dev/nonebot-plugin-strman](https://github.com/echobot-dev/nonebot-plugin-strman)，该 repo 不再维护，并作归档处理。
+
+该项目中未完成的计划更新将在迁移项目中上线，发版后将 NoneBot 插件商店上的项目一同作重定向处理。
+
 ## 介绍
 
 风格化字符串管理，或称字符串资源管理，即通过字符串标签来标识和获取一个字符串内容。设计初衷是用于灵活控制机器人的输出内容。
